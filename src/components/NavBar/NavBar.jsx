@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import Logo from "../Logo/Logo"
+import CartWidget from "../CartWidget/CartWidget"
 
 function NavBar() {
     return (
@@ -13,6 +14,7 @@ function NavBar() {
                 <li><Link to="/productos/remeras" className="menu-link">Remeras</Link></li>
                 <li><Link to="/productos/buzos" className="menu-link">Buzos</Link></li>
             </ul>
+            <CartWidget />
         </nav>
     )
 }
