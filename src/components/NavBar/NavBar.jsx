@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom"
 import Logo from "../Logo/Logo"
 import CartWidget from "../CartWidget/CartWidget"
+import { useContext } from "react"
+import { CartContext } from "../../context/CartContext/CartContext"
 
 function NavBar() {
+
+    const {cart} = useContext(CartContext)
+
     return (
         <nav className="navbar">
             <Link to="/" className="logo"><Logo /></Link>

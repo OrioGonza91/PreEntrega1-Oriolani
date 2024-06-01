@@ -1,6 +1,5 @@
-
-
 function ItemCount({stock, count, increment, decrement}) {
+
     return (
         <div className="item__count--container">
             <div className="item__count--counter--container">
@@ -12,7 +11,6 @@ function ItemCount({stock, count, increment, decrement}) {
                     +
                 </button>
             </div>
-            <button className="add__to__cart">Agregar al carrito</button>
         </div>
     )
 }

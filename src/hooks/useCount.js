@@ -17,11 +17,16 @@ function useCount(initialValue = 0) {
         }
     }
 
+    const reset = () => {
+        setCount(initialValue)
+    }
+
 
     return {
         count,
         increment,
-        decrement
+        decrement,
+        reset
     }
 }
 
