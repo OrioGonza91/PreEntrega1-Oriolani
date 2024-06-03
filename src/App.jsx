@@ -5,9 +5,11 @@ import Layout from './components/Layout/Layout';
 import './main.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Cart from './components/Cart/Cart';
-import CartProvider from './context/CartContext/CartContext';
+import { CartProvider } from './context/CartContext/CartContext';
 
 function App() {
+
+
 
   return (
     <div>

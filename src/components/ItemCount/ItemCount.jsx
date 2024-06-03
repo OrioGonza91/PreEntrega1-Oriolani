@@ -1,15 +1,17 @@
-function ItemCount({stock, count, increment, decrement}) {
+
+function ItemCount({quantity, handleDecrement, handleIncrement, handleAddToCart}) {
 
     return (
         <div className="item__count--container">
             <div className="item__count--counter--container">
-                <button className="item__count--button" onClick={decrement} disabled={count <=0}>
+                <button className="item__count--button" onClick={handleDecrement} disabled={quantity <=0}>
                     -
                 </button>
-                <span className="count">{count}</span>
-                <button className="item__count--button" onClick={increment} disabled={count>=stock}>
+                <span className="count">{quantity}</span>
+                <button className="item__count--button" onClick={handleIncrement}>
                     +
                 </button>
+                <button className="add__to__cart" onClick={handleAddToCart}>Agregar al carrito</button>
             </div>
         </div>
     )
