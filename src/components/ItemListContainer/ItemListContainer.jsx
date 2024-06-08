@@ -1,8 +1,7 @@
-import { useEffect } from "react"
-import { pedirDatos } from "../../helpers/pedirDatos"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ItemList from "../ItemList/ItemList"
 import { useParams } from "react-router-dom"
+import { collection, getDocs, getFirestore, query, where } from "firebase/firestore"
 
 
 function ItemListContainer({greeting}) {
@@ -12,17 +11,13 @@ function ItemListContainer({greeting}) {
     const {categoria} = useParams()
 
     useEffect(() => {
-        pedirDatos().then((res)=>{
-            if(categoria){
-                setProductos(res.filter((prod)=>
-                    prod.categoria === categoria
-                ))
-                setTitulo(categoria)
-            }else{
-                setProductos(res);
-                setTitulo('Productos')
-            }
+        const db = getFirestore();
+        const productsCollection = collection(db, "productos")
+
+        getDocs(productsCollection).then((snapshot)=>{
+            setProductos(snapshot.docs.map((doc)=> doc.data()))
         })
+        
         }, [categoria])
 
     return (
