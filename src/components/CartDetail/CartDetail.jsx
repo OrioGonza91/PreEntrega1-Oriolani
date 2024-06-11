@@ -6,8 +6,6 @@ function CartDetail({ item }) {
 
     const { removeFromCart, addToCart } = useContext(CartContext)
 
-    
-
     return (
         <div className="modal-container" key={item}>
             <div className="modal-content">
