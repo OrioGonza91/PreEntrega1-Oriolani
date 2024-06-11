@@ -4,29 +4,34 @@ import { useParams } from "react-router-dom"
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore"
 
 
-function ItemListContainer({greeting}) {
+function ItemListContainer({ greeting }) {
 
-    const [productos, setProductos] = useState([])
+    const [products, setProducts] = useState([])
     const [titulo, setTitulo] = useState("Productos")
-    const {categoria} = useParams()
+    const { categoria } = useParams()
 
     useEffect(() => {
-        const db = getFirestore();
-        const productsCollection = collection(db, "productos")
-
-        getDocs(productsCollection).then((snapshot)=>{
-            setProductos(snapshot.docs.map((doc)=> doc.data()))
-        })
-        
-        }, [categoria])
+        const queryDb = getFirestore();
+        const queryCollection = collection(queryDb, "productos")
+        if (categoria) {
+            const queryFilter = query(queryCollection, where('categoria', '==', categoria))
+            getDocs(queryFilter)
+                .then((res) => setProducts(res.docs.map(prod => ({ id: prod.id, ...prod.data() }))))
+            setTitulo(categoria)
+        } else {
+            getDocs(queryCollection)
+                .then((res) => setProducts(res.docs.map(prod => ({ id: prod.id, ...prod.data() }))))
+            setTitulo('Productos')
+        }
+    }, [categoria])
 
     return (
-    <div>
-        <h1 className="greeting">{greeting}</h1>
-        <ItemList productos= {productos} titulo={titulo} />
-    </div>
-    
-)
+        <div>
+            <h1 className="greeting">{greeting}</h1>
+            <ItemList productos={products} titulo={titulo} />
+        </div>
+
+    )
 }
 
 export default ItemListContainer

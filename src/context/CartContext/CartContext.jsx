@@ -8,6 +8,7 @@ export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState(cartInitialState)
 
     const addToCart = (item, quantity) => {
+
         const itemAdded = { ...item, quantity }
         const newCart = [...cart]
 
@@ -28,17 +29,23 @@ export const CartProvider = ({ children }) => {
         return cart.reduce((acc, prod) => acc + prod.precio * prod.quantity, 0)
     }
 
-    const removeFromCart = ()=> {
-        
+    const removeFromCart = (itemId) => {
+        const newCart = cart.map((item) => {
+            if (item.id === itemId) {
+                return { ...item, quantity: item.quantity - 1 };
+            }
+            return item;
+        }).filter((item) => item.quantity > 0);
+        setCart(newCart);
     }
 
     const clearCart = () => {
         setCart([])
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(cart))
-    },[cart])
+    }, [cart])
 
     return (
         <CartContext.Provider value={{ cart, addToCart, cartCount, cartTotal, clearCart, removeFromCart }}>

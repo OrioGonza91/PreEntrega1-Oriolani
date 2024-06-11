@@ -6,6 +6,8 @@ function CartDetail({ item }) {
 
     const { removeFromCart, addToCart } = useContext(CartContext)
 
+    
+
     return (
         <div className="modal-container" key={item}>
             <div className="modal-content">
@@ -21,7 +23,7 @@ function CartDetail({ item }) {
                     -
                 </button>
                 <p>{item.quantity}</p>
-                <button onClick={() => addToCart(item, 1)}>
+                <button onClick={() => addToCart(item, 1)} disabled ={item.quantity === item.stock}>
                     +
                 </button>
             </div>

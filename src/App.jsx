@@ -20,10 +20,6 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 
 function App() {
-
-
-
-
   return (
     <div>
       <CartProvider>
